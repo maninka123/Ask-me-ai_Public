@@ -152,6 +152,8 @@ This project is built with Next.js and is optimized for deployment on Vercel.
 3. Import your GitHub repository.
 4. Add your **Environment Variables** in the Vercel dashboard:
    - `GEMINI_API_KEY`: Your Gemini API Key
+   - `SUPABASE_URL`: (Optional) Your Supabase Project URL for logging
+   - `SUPABASE_KEY`: (Optional) Your Supabase public 'anon' key
 5. Click **Deploy**.
 
 ---
@@ -161,12 +163,22 @@ This project is built with Next.js and is optimized for deployment on Vercel.
 If you want to keep a log of user conversations, you can connect the app to a Supabase PostgreSQL database.
 
 1. Create a [Supabase](https://supabase.com/) project.
-2. Create a table named `chat_logs` with the following columns: `id` (uuid), `created_at` (timestamp, default now()), `question` (text), `answer` (text), `city` (text), `country` (text).
+2. Go to the SQL Editor in your Supabase dashboard and run the following snippet to create the `chat_logs` table:
+   ```sql
+   create table chat_logs (
+     id uuid default gen_random_uuid() primary key,
+     created_at timestamp with time zone default timezone('utc'::text, now()) not null,
+     question text,
+     answer text,
+     city text,
+     country text
+   );
+   ```
 3. Add these Environment Variables to Vercel (or `.env.local`):
    - `SUPABASE_URL`: Your Supabase Project URL
    - `SUPABASE_KEY`: Your Supabase public 'anon' key
 
-**Note:** If you do NOT want to use database logging, open **`ai-config.json`** and change `"recordDataInDatabase": true` to `"recordDataInDatabase": false`.
+**Note:** If you do NOT want to use database logging, open **`ai-config.json`** and change `"recordDataInDatabase": false`.
 
 ---
 

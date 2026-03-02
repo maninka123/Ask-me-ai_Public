@@ -4,7 +4,7 @@
 ![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white) 
 ![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
 
-*A retro terminal-style AI chatbot that lets people ask questions about you — powered by Google Gemini, your personal data, and cartoon-styled visuals.*
+*A retro terminal-style AI chatbot that lets people ask questions about you — powered by Google Gemini, your personal data, and visuals.*
 
 **[🔴 PLAY LIVE DEMO](https://ask-me-ai-beta.vercel.app/)**
 

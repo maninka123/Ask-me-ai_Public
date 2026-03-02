@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+:root {
+  --terminal-green: #39ff14;
+  --terminal-cyan: #00e5ff;
+  --terminal-bg: #0a0a0a;
+}
+
+body {
+  background-color: var(--terminal-bg);
+  color: var(--terminal-green);
+  font-family: 'Courier New', Courier, monospace;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Scrollbar styling for webkit */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000;
+  border-left: 1px solid rgba(57, 255, 20, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--terminal-green);
+}
+
+.scanline {
+  width: 100%;
+  height: 100px;
+  z-index: 50;
+  position: fixed;
+  pointer-events: none;
+  background: linear-gradient(0deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(57, 255, 20, 0.2) 10%,
+      rgba(0, 0, 0, 0.1) 100%);
+  opacity: 0.1;
+  top: 0;
+  animation: scanline 10s linear infinite;
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-100vh);
+  }
+
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+/* Blinking cursor */
+.typing-cursor::after {
+  content: '█';
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}

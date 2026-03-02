@@ -66,6 +66,8 @@ Edit `.env.local` and add your key:
 GEMINI_API_KEY=your_actual_key_here
 ```
 
+**Note:** Make sure to also edit **`ai-config.json`** to suit your requirements (change the name, persona, pronouns, and terminal text).
+
 ### 3. Add Your Data
 
 | Path | What goes here |
@@ -138,6 +140,33 @@ Ask-me-ai/
 ## Interface Preview
 
 ![Terminal Interface](./public/Interface.png)
+
+---
+
+## Deployment (Vercel)
+
+This project is built with Next.js and is optimized for deployment on Vercel.
+
+1. Push your code to a GitHub repository.
+2. Go to [Vercel](https://vercel.com/) and create a new project.
+3. Import your GitHub repository.
+4. Add your **Environment Variables** in the Vercel dashboard:
+   - `GEMINI_API_KEY`: Your Gemini API Key
+5. Click **Deploy**.
+
+---
+
+## Optional: Database Logging (Supabase)
+
+If you want to keep a log of user conversations, you can connect the app to a Supabase PostgreSQL database.
+
+1. Create a [Supabase](https://supabase.com/) project.
+2. Create a table named `chat_logs` with the following columns: `id` (uuid), `created_at` (timestamp, default now()), `question` (text), `answer` (text), `city` (text), `country` (text).
+3. Add these Environment Variables to Vercel (or `.env.local`):
+   - `SUPABASE_URL`: Your Supabase Project URL
+   - `SUPABASE_KEY`: Your Supabase public 'anon' key
+
+**Note:** If you do NOT want to use database logging, open **`ai-config.json`** and change `"recordDataInDatabase": true` to `"recordDataInDatabase": false`.
 
 ---
 

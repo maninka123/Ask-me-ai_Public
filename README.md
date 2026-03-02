@@ -134,7 +134,7 @@ Ask-me-ai/
 
 ## Customization
 
-- **Configuration File** — Edit `ai-config.json` at the root of the project to change the person's name, pronouns, terminal text, AI persona, and tone.
+- **Configuration File** — Edit `ai-config.json` at the root of the project to change the person's name, pronouns, terminal text, AI persona, tone, models, and set `"maxSessionMessages"` (use `0` for unlimited).
 - **Terminal colors** — Edit CSS variables in `src/app/globals.css`
 - **Data sources** — Extend `src/utils/dataLoader.js` for new file types
 - **Swap LLM** — Replace Gemini SDK calls with OpenAI, Anthropic, etc.

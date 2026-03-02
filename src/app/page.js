@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import config from '@/utils/config';
 
-const SESSION_LIMIT = 20;
+const SESSION_LIMIT = typeof config.maxSessionMessages === 'number' ? config.maxSessionMessages : 20;
 
 export default function Home() {
   const [messages, setMessages] = useState([
@@ -22,7 +22,7 @@ export default function Home() {
 
   const handleSubmit = async (e) => {
     if (e) e.preventDefault();
-    if (!inputMessage.trim() || isLoading || sessionCount >= SESSION_LIMIT) return;
+    if (!inputMessage.trim() || isLoading || (SESSION_LIMIT > 0 && sessionCount >= SESSION_LIMIT)) return;
 
     const userMessage = { role: 'user', content: inputMessage.trim() };
     setMessages(prev => [...prev, userMessage]);
@@ -154,12 +154,25 @@ export default function Home() {
           <p className="text-[10px] opacity-40 mt-0.5">* Powered by Gemini 2.5 Flash</p>
         </div>
         <div className="text-right text-xs shrink-0 ml-4 border border-[#39ff14]/30 px-2 py-1 bg-black/50">
-          <div className={`font-bold tracking-wide ${SESSION_LIMIT - sessionCount <= 10 ? 'text-red-400' : 'text-[#39ff14]'}`}>
-            {SESSION_LIMIT - sessionCount} <span className="opacity-70 font-normal">cmds left</span>
-          </div>
-          <div className="text-[10px] opacity-50 mt-0.5 uppercase tracking-wide">
-            (resets on refresh)
-          </div>
+          {SESSION_LIMIT > 0 ? (
+            <>
+              <div className={`font-bold tracking-wide ${SESSION_LIMIT - sessionCount <= 10 ? 'text-red-400' : 'text-[#39ff14]'}`}>
+                {SESSION_LIMIT - sessionCount} <span className="opacity-70 font-normal">cmds left</span>
+              </div>
+              <div className="text-[10px] opacity-50 mt-0.5 uppercase tracking-wide">
+                (resets on refresh)
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="font-bold tracking-wide text-[#39ff14]">
+                ∞ <span className="opacity-70 font-normal">cmds left</span>
+              </div>
+              <div className="text-[10px] opacity-50 mt-0.5 uppercase tracking-wide">
+                (unlimited)
+              </div>
+            </>
+          )}
         </div>
       </header>
 
@@ -258,15 +271,15 @@ export default function Home() {
             type="text"
             value={inputMessage}
             onChange={(e) => setInputMessage(e.target.value)}
-            disabled={isLoading || sessionCount >= SESSION_LIMIT}
+            disabled={isLoading || (SESSION_LIMIT > 0 && sessionCount >= SESSION_LIMIT)}
             autoComplete="off"
             spellCheck="false"
-            className={`flex-1 bg-transparent border-none outline-none w-full text-base ${sessionCount >= SESSION_LIMIT
+            className={`flex-1 bg-transparent border-none outline-none w-full text-base ${SESSION_LIMIT > 0 && sessionCount >= SESSION_LIMIT
               ? 'text-red-400 placeholder-red-400'
               : 'text-[#00e5ff] placeholder-[#00e5ff]/30'
               }`}
             placeholder={
-              sessionCount >= SESSION_LIMIT
+              (SESSION_LIMIT > 0 && sessionCount >= SESSION_LIMIT)
                 ? "SESSION LIMIT REACHED. PLEASE REFRESH PAGE TO CONTINUE."
                 : isLoading
                   ? "Awaiting system response..."

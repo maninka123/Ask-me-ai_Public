@@ -15,6 +15,7 @@
     "aiTone": "You're warm, friendly, and a bit witty. Talk like a real person having a casual chat, not a formal assistant.",
     "chatModel": "gemini-2.5-flash",
     "imageAnalysisModel": "gemini-2.5-flash",
+    "maxSessionMessages": 20,
     "recordDataInDatabase": true,
     "imagesFolder": "Images"
 }

@@ -143,7 +143,7 @@ Ask-me-ai/
 
 ## Interface Preview
 
-![Terminal Interface](./public/interface.png)
+![Terminal Interface](./public/Interface.png)
 
 ---
 
